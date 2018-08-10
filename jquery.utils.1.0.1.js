@@ -25,6 +25,22 @@
         return _countAjaxRunning;
     }
 
+    $.execStackOfFunctions = function( arrayOfFunctions ) {        
+        var next         = arrayOfFunctions.shift();
+        var execInterval = setInterval(function() {
+            // if (next) console.log( next );
+            if ( $.thereIsAjaxRuning === false ) { // IF there is NOT ajax running, call next function
+                clearInterval( execInterval );
+                $.execStackOfFunctions( arrayOfFunctions );
+            }
+        }, 500);
+        if (next === undefined) {
+            clearInterval( execInterval );
+        }
+        if (next) {
+            next();
+        }
+    }
     /**
      * Format an message with arguments.
      * For instance: formatMessage(' My {0} is {1} ',['dog','happy']) will produce "My dog is happy";

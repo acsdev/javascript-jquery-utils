@@ -1,13 +1,10 @@
 /**
- * Jquery many util codes
+ * Extension on jquery functions 
  * Sample can be found at samples.html
  *       
  * @author allansantos
  */
-var JQueryUtils = (function( $ ){
-/////////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE FUNCIONS /////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
+(function( $ ){
     var _countAjaxRunning   = 0;    
     var _originalJQueryAjax = $.ajax;
     $.ajax = function() {
@@ -21,19 +18,15 @@ var JQueryUtils = (function( $ ){
         }, 100);
         return _call;
     };
-
-    $.fn.valAndThenChange = function( v ) {
-        return this.val(v).trigger('change');
-    };
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC FUNCIONS //////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-    this.thereIsAjaxRuning = function() {        
+    $.thereIsAjaxRuning = function() {        
         return _countAjaxRunning > 0;
     }
-    this.howManyIsAjaxRuning = function() {
+    $.howManyIsAjaxRuning = function() {
         return _countAjaxRunning;
     }
-    return this;
+
+
+    $.valAndThenChange = function( v ) {
+        return this.val(v).trigger('change');
+    };
 }( jQuery ));

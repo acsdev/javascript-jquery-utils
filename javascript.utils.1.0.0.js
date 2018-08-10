@@ -25,18 +25,6 @@ var JSUtils = (function() {
     fn.jsonEquals = function(json1, json2) {
         return JSON.stringify(json1) === JSON.stringify(json2);
     }
-    
-    /**
-     * Format an message with arguments.
-     * For instance: formatMessage(' My {0} is {1} ',['dog','happy']) will produce "My dog is happy";
-     */
-    fn.formatMessage = function( messages, arrayValues ) {
-        each(arrayValues, function( index ) {
-            var r = new RegExp('\\{'+index+'\\}','g');
-            messages = messages.replace( r, this );
-        });
-        return messages.trim();
-    }
 
     /**
      * Order an array with this kind of data: [0.1.0, 1.0.1, 2.0.1, 0.3.0.1, 1.0, 2.0.3, ...]

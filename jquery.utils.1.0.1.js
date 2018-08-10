@@ -25,6 +25,17 @@
         return _countAjaxRunning;
     }
 
+    /**
+     * Format an message with arguments.
+     * For instance: formatMessage(' My {0} is {1} ',['dog','happy']) will produce "My dog is happy";
+     */
+    $.formatMessage = function( messages, arrayValues ) {
+        $.each(arrayValues, function( index ) {
+            var r = new RegExp('\\{'+index+'\\}','g');
+            messages = messages.replace( r, this );
+        });
+        return messages.trim();
+    }
 
     $.valAndThenChange = function( v ) {
         return this.val(v).trigger('change');

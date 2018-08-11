@@ -1,3 +1,14 @@
+var Thread = {
+	sleep: function(ms) {
+		var start = Date.now()            
+		while (true) {
+			var clock = (Date.now() - start);
+			if (clock >= ms) break;
+		}
+		
+	}
+};
+
 var express    = require('express');
 var bodyParser = require('body-parser');
 //
@@ -18,8 +29,9 @@ server.get('/',function(req, res) {
 	res.status( 200 ).json( { 'status':'tested' } );
 });
 
-
 server.get('/listPairNumberString',function(req, res) {
+	Thread.sleep(2000);
+	
 	var array = [];
 	for(var i = 0; i < 100; i++) {
 		var item  = {
@@ -32,6 +44,9 @@ server.get('/listPairNumberString',function(req, res) {
 });
 
 server.get('/listPairNumberDate',function(req, res) {
+	
+	Thread.sleep(2000);
+
 	var array = [];
 	for(var i = 0; i < 100; i++) {
 		var item  = {
@@ -40,6 +55,7 @@ server.get('/listPairNumberDate',function(req, res) {
 		};	
 		array.push( item );
 	}
+
 	res.status( 200 ).json( array );
 });
 

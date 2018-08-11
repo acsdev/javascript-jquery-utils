@@ -86,7 +86,6 @@
                         $(option).text( $(option).text() + ' . ' );
                     }
                     if ( $(select).children('option').length > 1 ) {
-                        $(select).attr('selectedIndex', 0);
                         clearInterval( interval );
                     }
                 }, 500);
@@ -111,7 +110,7 @@
 
                 $.each( collection, function(){
                     var opt = $('<option>', { id: this[value], text: this[label] });
-                    if (addicionalInfo['data-additional-info']) {
+                    if (addicionalInfo && addicionalInfo['data-additional-info']) {
                         $(opt).attr('data-additional-info', addicionalInfo['data-additional-info']);
                     }
                     $(select).append( opt );

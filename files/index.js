@@ -65,14 +65,44 @@
     $(document).on('click', '#btnExecFillCmbx', function() {
         cleanMessages();
         try {
+            var fnCombo01 = function() {
+                $('#cmbxRandomText').selectOneWaiting();
+                $
+                .ajax({
+                    type: 'GET',
+                    url:  'http://localhost:3000/listPairNumberString',
+                    contentType: 'application/json',
+                })
+                .done(function( result, textStatus, jqXHR ) {
+                    $('#cmbxRandomText').addOptionsOnSelect( result, 'id', 'desc' );
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    putMessages('Error on ajax at fnCombo01');
+                }).always( function() {putMessages('Execute fnCombo01 with ajax');} );
+            };
             
+            var fnCombo02 = function() {
+                $('#cmbxDate').selectOneWaiting();
+                $
+                .ajax({
+                    type: 'GET',
+                    url:  'http://localhost:3000/listPairNumberDate',
+                    contentType: 'application/json',
+                })
+                .done(function( result, textStatus, jqXHR ) {
+                    $('#cmbxDate').addOptionsOnSelect( result, 'id', 'desc' );
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    putMessages('Error on ajax at fnCombo01');
+                }).always( function() {putMessages('Execute fnCombo02 with ajax');} );
+            };
+
             $.execStackOfFunctions([
-                function() {alert('1')},
-                function() {alert('2')}
-
+                fnCombo01,
+                function() {  $('#cmbxRandomText').attr('selectedIndex',10), putMessages('Set value at fnCombo01 without'); },
+                fnCombo02,
+                function() {  $('#cmbxDate').attr('selectedIndex',5), putMessages('Set value at fnCombo02 without'); }
             ]);
-            
-
         } catch (ex) { 
             putMessages(ex);
         }

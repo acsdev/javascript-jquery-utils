@@ -1,4 +1,4 @@
-input[type=text], textarea, select {
+input[type=text],input[type=number],input[type=date], textarea, select {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;

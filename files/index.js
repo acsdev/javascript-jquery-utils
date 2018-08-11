@@ -44,7 +44,40 @@
             putMessages('Data is not in correct format');
         }
     });
+    $(document).on('click', '#btnRandom', function() {
+        cleanMessages();
+        try {
+            var div = $(this).parent();
+            $(div).find('input[type=text]').val( JSUtils.randomString() );
+            $(div).find('input[type=number]').val( JSUtils.randomPercentNumber() );
 
+            var now = JSUtils.randomDate();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var dateOnFormat = '_YYYY-_MM-_DD'.replace(/_YYYY/g,now.getFullYear()).replace(/_MM/g,month).replace(/_DD/g,day);
+            $(div).find('input[type=date]').val( dateOnFormat );
+            
+        } catch (ex) { 
+            putMessages('Data is not in correct format');
+        }
+    });
+    
+    $(document).on('click', '#btnExecFillCmbx', function() {
+        cleanMessages();
+        try {
+            
+
+            
+
+        } catch (ex) { 
+            putMessages('Data is not in correct format');
+        }
+    });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $(document).on('click','.tablinks', function() {
         $('.tabcontent').hide();
         $('.tablinks').removeClass('active');

@@ -36,8 +36,7 @@ var JSUtils = (function() {
      * Generate random dates
      */
     fn.randomDate = function () {
-        var _d = new Date(new Date().getTime() + (Math.random() * 1000000000));
-        return _d.getDate() + '/' + _d.getMonth() + '/' + _d.getFullYear();
+        return new Date(new Date().getTime() + (Math.random() * 1000000000000));
     };
     
     /**

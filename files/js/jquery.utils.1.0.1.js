@@ -53,7 +53,47 @@
         return messages.trim();
     }
 
-    $.valAndThenChange = function( v ) {
+////////////////////////////////////////////
+/// FUNCTIONS THAT YOU CAN CALL ON INPUTS //
+////////////////////////////////////////////
+    /**
+     * Use method "val" and after calls trigger('change')
+     * @param {*} v 
+     */
+    $.fn.valAndThenChange = function( v ) {
         return this.val(v).trigger('change');
     };
+
+    /**
+     * Create an animated option to suggest that HTMLSelectOne (Combobox) is wating to be loaded
+     */
+    $.fn.selectOneWaiting = function() {
+        try {
+            var select = $(this);
+            if ($(select)[0].type === 'select-one') {
+                var loadingText = $(select).attr('data-loading-text') ? $(select).attr('data-loading-text') : 'Getting data';
+                var option      = $('<option/>', {text: loadingText});
+                //
+                $(select).empty();
+                $(select).append( option );
+                $(select).attr('selectedIndex', 0);
+                //
+                var baseSize = loadingText.length;
+                var interval = window.setInterval(function() {
+                    if ( $(option).text().length > ( baseSize + 6) ) {
+                        $(option).text( loadingText );
+                    } else {
+                        $(option).text( $(option).text() + ' . ' );
+                    }
+                    if ( $(select).children('option').length > 1 ) {
+                        $(select).attr('selectedIndex', 0);
+                        clearInterval( interval );
+                    }
+                }, 500);
+            }
+        } catch(ex) {
+            throw new Error('this function can only be applied on select-one ')
+        }        
+    };
+
 }( jQuery ));

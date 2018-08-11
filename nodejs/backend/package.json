@@ -1,0 +1,15 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "Mock of data",
+	"main": "index.js",
+	"scripts": {
+		"debug": "./node_modules/nodemon/bin/nodemon.js --inspect=127.0.0.1:9230 index.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.16.3",
+		"nodemon": "^1.18.3"
+	}
+}

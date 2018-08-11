@@ -1,0 +1,16 @@
+{
+	"name": "fronend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"debug": "./node_modules/nodemon/bin/nodemon.js --inspect=127.0.0.1:9229 index.js -w ../../files"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.16.3",
+		"nodemon": "^1.18.3",
+		"serve-favicon": "^2.5.0"
+	}
+}

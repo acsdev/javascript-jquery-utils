@@ -29,7 +29,7 @@
         var next         = arrayOfFunctions.shift();
         var execInterval = setInterval(function() {
             // if (next) console.log( next );
-            if ( $.thereIsAjaxRuning === false ) { // IF there is NOT ajax running, call next function
+            if ( $.thereIsAjaxRuning() === false ) { // IF there is NOT ajax running, call next function
                 clearInterval( execInterval );
                 $.execStackOfFunctions( arrayOfFunctions );
             }
@@ -94,6 +94,32 @@
         } catch(ex) {
             throw new Error('this function can only be applied on select-one ')
         }        
+    };
+
+    /**
+     * Create an animated option to suggest that HTMLSelectOne (Combobox) is wating to be loaded
+     */
+    $.fn.addOptionsOnSelect = function(collection, value, label, addicionalInfo) {
+        try {
+            var select = $(this);
+            if ($(select)[0].type === 'select-one') {
+
+                $(select).empty();
+                if ( $(select).attr( 'data-default-option' )) {
+                    $(select).append( $('<option>', {text: $(select).attr( 'data-default-option' )}) );
+                }
+
+                $.each( collection, function(){
+                    var opt = $('<option>', { id: this[value], text: this[label] });
+                    if (addicionalInfo['data-additional-info']) {
+                        $(opt).attr('data-additional-info', addicionalInfo['data-additional-info']);
+                    }
+                    $(select).append( opt );
+                });
+            }
+        } catch(ex) {
+            throw new Error('this function can only be applied on select-one ')
+        }     
     };
 
 }( jQuery ));

@@ -66,11 +66,15 @@
         cleanMessages();
         try {
             
+            $.execStackOfFunctions([
+                function() {alert('1')},
+                function() {alert('2')}
 
+            ]);
             
 
         } catch (ex) { 
-            putMessages('Data is not in correct format');
+            putMessages(ex);
         }
     });
 

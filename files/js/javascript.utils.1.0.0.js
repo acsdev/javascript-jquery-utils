@@ -18,6 +18,27 @@ var JSUtils = (function() {
             if (clock >= ms) break;
         }        
     }
+    /**
+     * Generate random String
+     */
+    fn.randomString = function () {
+        return Math.random().toString(36).replace(/[^a-z]+/g, '');
+    };
+
+    /**
+     * Generate random percent number link 0.5, 0.37, 0.96, etc;
+     */
+    fn.randomPercentNumber = function () {
+        return Math.round(Math.random() * 100) / 100;
+    };
+
+    /**
+     * Generate random dates
+     */
+    fn.randomDate = function () {
+        var _d = new Date(new Date().getTime() + (Math.random() * 1000000000));
+        return _d.getDate() + '/' + _d.getMonth() + '/' + _d.getFullYear();
+    };
     
     /**
      * Test if two JSON objects are equals

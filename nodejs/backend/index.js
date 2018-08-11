@@ -12,7 +12,7 @@ server.use(function (req, res, next) {
 	next();
 });
 
-server.listen(8001, function(){ console.log('Listen on port 8001'); });
+server.listen(3000, function(){ console.log('Listen on port 3000'); });
 
 server.get('/',function(req, res) {
 	res.status( 200 ).json( { 'status':'tested' } );

@@ -79,5 +79,42 @@ var JSUtils = (function() {
         return array;
     }
 
+    /**
+     * Dowload an file that is converted to base64
+     * 
+     * @param {*} base64Value (requeired) file data
+     * @param {*} fileName (requeired) file name
+     * @param {*} extension (requeired) file extension
+     * @param {*} callbackError (optional) callback function in case of error
+     * @param {*} callbackSuccess (optional) callback function in case of success
+     */
+    fn.downloadFileWithBase64 = function( base64Value, fileName, extension, callbackError, callbackSuccess ) {
+        try {
+            var binaryString = window.atob(base64Value);
+            var binaryLen = binaryString.length;
+            var bytes = new Uint8Array(binaryLen);
+            for (var i = 0; i < binaryLen; i++) {
+            var ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+            }
+            
+            var blob = new Blob([bytes]);
+            //
+            var link      = document.createElement('a');
+            link.href     = window.URL.createObjectURL(blob);
+            link.download = fileName.concat(new Date().getTime()).concat( extension );
+            link.click(); 
+        } catch(ex) {
+            console.log( ex );
+            if (callbackError && typeof callbackError === 'function' ) {
+                callbackError();
+            }
+        } finally {
+            if (callbackSuccess && typeof callbackSuccess === 'function') {
+                callbackSuccess();
+            }
+        }
+    }
+
     return fn; 
 })();

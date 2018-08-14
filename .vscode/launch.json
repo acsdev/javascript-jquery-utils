@@ -9,8 +9,9 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}/nodejs/backend",
-            "runtimeExecutable": "npm",
             "port": 9230,
+            "restart": true,
+            "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script", "debug"
             ]
@@ -20,8 +21,9 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}/nodejs/frontend",
-            "runtimeExecutable": "npm",
             "port": 9229,
+            "restart": true,
+            "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script", "debug"
             ]

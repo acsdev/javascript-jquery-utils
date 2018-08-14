@@ -10,7 +10,12 @@
             $(messages).append($('<li/>', {text: this}));
         });
     };
-    
+
+    $(document).on('click', '#cleanMessages', function() {
+        cleanMessages();
+    });
+
+
     $(document).on('click', '#btnSleep2', function() {
         cleanMessages();
         putMessages('INI', new Date());
@@ -108,6 +113,13 @@
         }
     });
 
+    $(document).on('click', '[data-link-add-or-remove]', function() {
+        $.duplicateElementAndAddBelow({
+            group: $(this).parents('div#groupOfDiv'),
+            'afterAdd'    : function() { putMessages('Added'); },
+            'afterRemove' : function() { putMessages('Removed'); }
+        })
+    });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

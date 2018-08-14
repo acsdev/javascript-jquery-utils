@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div id="message-container">
-			<h2>Messages ( drag and drog ) .:. Sample of dragable function</h2>
+			<h2>Messages ( drag and drog ) .:. Sample of dragable function <a href="javascript:void(0)" id="cleanMessages">clear</a></h2>
 			
 			<div id="messages">
 				<ol>
@@ -45,14 +45,42 @@
 			</div>
 			<div class="tabcontent">
 				<h4>This sample will use show the functions:</h4>
-				<ul>
-					<li>selectOneWaiting <br/><span style="margin-left:25px;color: red">Shows '. . .' while wait for data</span></li>
-					<li>addOptionsOnSelect <br/><span style="margin-left:25px;color: red">Add many 'option' on combobox</span></li>
-					<li>execStack <br/><span style="margin-left:25px;color: red">Execute functions in order</span></li>
-				</ul>
+				<table>
+					<tr>
+						<td>selectOneWaiting</td>
+						<td><span style="color: red">Shows '. . .' while wait for data</span></td>
+					</tr>
+					<tr>
+						<td>addOptionsOnSelect</td>
+						<td><span style="color: red">Add many 'option' on combobox</span></td>
+					</tr>
+					<tr>
+						<td>execStack</td>
+						<td><span style="color: red">Execute functions in order</span></td>
+					</tr>
+				</table>
 				<select id="cmbxRandomText"><option value="">Select</option></select>
 				<select id="cmbxDate" data-loading-text="Loading"><option value="">Select</option></select>
 				<button id="btnExecFillCmbx">Do it</button>
+
+				<h4>This sample will show the use of the function <span style="color: red">duplicateElementAndAddBelow</span>:</h4>
+				<div id="groupOfDiv">
+					<div>
+						<select>
+							<option value="">Select</option>
+							<option value="1">UM</option>
+							<option value="2">DOIS</option>
+						</select>
+
+						<input type="text" id="iData01" />
+
+						<a href="javascript:void(0)" data-link-add-or-remove id="lnkADD">[a] ADD</a>
+						&nbsp;&nbsp;&nbsp;
+						<input type="button" data-link-add-or-remove value="[input] ADD" id="ibADD"/>
+						&nbsp;&nbsp;&nbsp;
+						<button data-link-add-or-remove id="bADD">[button] ADD</button>
+					</div>
+				</div>
 			</div>
 			<div class="tabcontent">
 				<h4>This sample will use show the functions:</h4>

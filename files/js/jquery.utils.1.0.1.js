@@ -70,7 +70,7 @@
      * }
      * @param {*} callback after execute funcions, start callback functions if exists
      */
-    $.duplicateElementAndAddBelow = function( options, callback ) {
+    $.duplicateElementAndAddBelow = function( options ) {
         
         var repeatableQTD      = $( options.group ).children('div').length;   
 
@@ -81,6 +81,25 @@
 
         // CLEAN ALL INPUT VALUES
         $(newDiv).find(':input').val( null );
+
+        var elementAddOrRemove = $(newDiv).find('[data-link-add-or-remove]');
+        $( elementAddOrRemove ).each(function() {
+            $(this).removeAttr('id');
+            if ($(this).is('a')) {
+                $(this).attr('href','javascript:void(0)');
+                $(this).text('RVM');
+            }
+            if ($(this).is('input[type=button]')) {
+                $(this).attr('value','RVM');
+            }
+            if ($(this).is('button')) {
+                $(this).text('RVM');
+            }
+            $(this).click(function() {
+                $(this).parent('div').remove();
+                if (options && options.afterRemove) { options.afterRemove(); }
+            });
+        });
 
         // PREARE IDS
         var next = Date.now();
@@ -100,9 +119,7 @@
         //
         $( options.group ).append( newDiv );
 
-        if (callback && typeof callback === 'function') {
-            callback();
-        }
+        if (options && options.afterAdd) { options.afterAdd(); }
     };
 
     /**

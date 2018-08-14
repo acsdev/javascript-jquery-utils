@@ -103,25 +103,31 @@
 					</tr -->
 				</table>
 				<br />
-
-				<form action="#" method="POST" class="jsonFORM" id="F_frmToJSON">
-					<label for="iSex1" id="lSex">Sex:</label>
-					<input type="radio" name="male" value="M" id="iSex1" data-entity-bind="sex" /><label style="width: 40px;" for="iSex" id="lSex">Male</label>
-					<input type="radio" name="female" value="F" id="iSex2" data-entity-bind="sex" /><label style="width: 40px;" for="iSex" id="lSex">Female</label>
-					<br />
-					<label for="iName" id="lName">Name:</label>
-					<input type="text" id="iName" data-entity-bind="name" />
-					<br />
-					<label for="iFile" id="lFile">Any File:</label>
-					<input type="file" id="iFile" data-entity-bind="fileName" data-entity-bind-base64="base64Data"/>
-					<br />
-					<label for="iPhone01" id="lPhone01">Phone 01:</label>
-					<input type="number" id="iPhone01" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="0" />
-					<br />
-					<label for="iPhone02" id="lPhone02">Phone 02:</label>
-					<input type="number" id="iPhone02" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="1"/>
-				</form>
-				<textarea rows="30" cols="100" disabled id="iJsonCurrentData"></textarea>
+				<div class="wrapper2spec7and3">
+					<div>
+						<form action="#" method="POST" class="jsonFORM" id="F_frmToJSON">
+							<label for="iSex1" id="lSex">Sex:</label>
+							<input type="radio" name="male" value="M" id="iSex1" data-entity-bind="sex" /><label style="width: 40px;" for="iSex" id="lSex">Male</label>
+							<input type="radio" name="female" value="F" id="iSex2" data-entity-bind="sex" /><label style="width: 40px;" for="iSex" id="lSex">Female</label>
+							<br />
+							<label for="iName" id="lName">Name:</label>
+							<input type="text" id="iName" data-entity-bind="name" />
+							<br />
+							<label for="iFile" id="lFile">Any File:</label>
+							<input type="file" id="iFile" data-entity-bind="fileName" data-entity-bind-base64="base64Data"/>
+							<br />
+							<label for="iPhone01" id="lPhone01">Phone 01:</label>
+							<input type="number" id="iPhone01" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="0" />
+							<br />
+							<label for="iPhone02" id="lPhone02">Phone 02:</label>
+							<input type="number" id="iPhone02" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="1"/>
+						</form>
+					</div>
+					<div>
+						<textarea rows="30" cols="100" disabled id="iJsonCurrentData"></textarea>
+					</div>
+					<div><!-- third column --></div>
+				</div>
 			</div>
 		</div>
 		<script src="./js/jquery.v3.3.1.js"></script>

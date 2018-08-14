@@ -49,3 +49,11 @@ input[type=button], button {
     display: inline-block;
     text-align: end;
 }
+
+.wrapper2spec7and3 {
+    display: grid;
+    grid-template-columns: 3fr 3fr 4fr;
+    grid-gap: 10px;
+    background-color: #fff;
+    color: #444;
+}

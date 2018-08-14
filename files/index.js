@@ -143,7 +143,7 @@
             'classNameForDivInMoviment':'divActiveMove',
             'afterMove': function() {
                 cleanMessages();
-                putMessages('Moved'); 
+                putMessages('Moved at ' +new Date()); 
             }
         });
     });

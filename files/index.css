@@ -20,10 +20,12 @@ input[type=button], button {
     border: dotted gray 1px;
     border-top: none
 }
+
 .divActiveMove {
     background: grey;
     z-index: 1000;
 }
+
 #message-container {
     width: 600px; 
     min-height: 200px;

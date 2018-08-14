@@ -293,6 +293,50 @@
     };
 
     /**
+     * Drag and Drop Div
+     * 
+     * @param {*} options (optional) JSON object with options that you can use to do a little bit more
+     *      options.classNameForDivInMoviment >> if you wanna to usa an class while div is moviment
+     *      options.afterMove                 >> if you wanna execute something after you move
+     *  
+     */
+    $.fn.dragable = function( options ) {
+        try {
+            if (! $(this).is('div')) { throw new Error(); };
+
+            var divMove = $(this);
+            $(divMove).on('mousedown', function (e) {
+
+                if (options && options.classNameForDivInMoviment) {
+                    $(divMove).addClass( options.classNameForDivInMoviment );
+                }
+                //
+                $(divMove).parents().on('mousemove', function (e) {
+                    $(divMove).offset({
+                        top: e.pageY - $(divMove).outerHeight() / 2,
+                        left: e.pageX - $(divMove).outerWidth() / 2
+                    });
+                });
+                
+            });
+
+            $(divMove).on('mouseup', function (e) {
+                if (options && options.classNameForDivInMoviment) {
+                    $(divMove).removeClass( options.classNameForDivInMoviment );
+                }
+
+                $(divMove).parents().off('mousemove');
+                if (options && options.afterMove) {
+                    options.afterMove();
+                }
+            });
+            
+        } catch(ex) {
+            throw new Error('Funcion dragable can only be used in DIV element')
+        } 
+    }
+
+    /**
      * Create an animated option to suggest that HTMLSelectOne (Combobox) is wating to be loaded
      */
     $.fn.selectOneWaiting = function() {
@@ -348,5 +392,7 @@
             throw new Error('this function can only be applied on select-one ')
         }     
     };
+
+
 
 }( jQuery ));

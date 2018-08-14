@@ -99,9 +99,9 @@
 
             $.execStackOfFunctions([
                 fnCombo01,
-                function() {  $('#cmbxRandomText').attr('selectedIndex',10), putMessages('Set value at fnCombo01 without'); },
+                function() {  $('#cmbxRandomText').attr('selectedIndex',10), putMessages('Set value at fnCombo01 without ajax'); },
                 fnCombo02,
-                function() {  $('#cmbxDate').attr('selectedIndex',5), putMessages('Set value at fnCombo02 without'); }
+                function() {  $('#cmbxDate').attr('selectedIndex',5), putMessages('Set value at fnCombo02 without ajax'); }
             ]);
         } catch (ex) { 
             putMessages(ex);
@@ -121,18 +121,6 @@
         //
         $(tab).fadeIn('slow', function() { $(btn).addClass('active') });
     });
-    
-    $('div#message-container').on('mousedown', function (e) {
-        $(this).addClass('divActiveMove').parents().on('mousemove', function (e) {
-            $('.divActiveMove').offset({
-                top: e.pageY - $('.divActiveMove').outerHeight() / 2,
-                left: e.pageX - $('.divActiveMove').outerWidth() / 2
-            }).on('mouseup', function () {
-                $(this).removeClass('divActiveMove');
-            });
-        });
-        return false;    
-    });
 
     $(document).ready(function() {
         var staticJsonSample = {
@@ -150,5 +138,13 @@
 
 
         $('.tab').children('a').get(1).click(); //START ON TAB 02
+
+        $('div#message-container').dragable({
+            'classNameForDivInMoviment':'divActiveMove',
+            'afterMove': function() {
+                cleanMessages();
+                putMessages('Moved'); 
+            }
+        });
     });
 })();

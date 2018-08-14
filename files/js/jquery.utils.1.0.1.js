@@ -73,11 +73,6 @@
     $.duplicateElementAndAddBelow = function( options, callback ) {
         
         var repeatableQTD      = $( options.group ).children('div').length;   
-        var reorganize = function() {
-            $( options.group ).children('div').each(function( index ) {
-                $(this).find(':input[data-entity-bind-index]').attr('data-entity-bind-index', index);
-            });
-        }
 
         if (options.limit && options.limit == repeatableQTD) { return; }
                 
@@ -103,9 +98,7 @@
             }
         });
         //
-        $( options.group ).append( newDiv );        
-        
-        reorganize();
+        $( options.group ).append( newDiv );
 
         if (callback && typeof callback === 'function') {
             callback();
@@ -125,7 +118,6 @@
      * @param {*} jsonOBJECT JSON object
      */
     $.addValueOnJSON = function(input, jsonOBJECT) {
-
         var onFileType = function( objectToPutData, input, base64DottedNotation ) {
             if ( $(input).attr('type') === 'file' ) {
                 var fileReader = new FileReader();
@@ -146,7 +138,7 @@
         }
 
         var dottedNotationAttribute = $(input).attr('data-entity-bind');
-        var dottedNotationAttributeBase64 = $(input).attr('data-entity-bind-img64');
+        var dottedNotationAttributeBase64 = $(input).attr('data-entity-bind-base64');
         
         var isAttrInList = /(.+)(\[)(.+)(\]$)/.test( dottedNotationAttribute );
         
@@ -176,11 +168,11 @@
             if ( $(input).attr('type') === 'file' ) {
                 onFileType( jsonOBJECT, $(input), dottedNotationAttributeBase64 );
             }
-        }           
+        }
     };
 
     /**
-     * Set a value int json object.
+     * Set a value into json object.
      * 
      * @param {*} jsonOBJECT json object
      * @param {*} dottedNotationAttribute  path on attr that will receive the value
@@ -264,7 +256,7 @@
                 if (input.length == 0) {
                     
                     var newGroup = $('[data-entity-bind="_B"]'.replace(/_B/g, bindValue)).parents('div[data-repeatable]').parent('div');
-                    OSScreenUtils.duplicateElementAndAddBelow( {'group' : newGroup });
+                    $.duplicateElementAndAddBelow( {'group' : newGroup });
                     //
                     input = $( parentArea ).find( fieldSelectorExpression );
                 }

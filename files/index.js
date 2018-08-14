@@ -123,6 +123,8 @@
     });
 
     $(document).ready(function() {
+        $('.tab').children('a').get(2).click(); //START ON TAB 02
+
         var staticJsonSample = {
             "_id": "5b6ef116157df345e9d7c77b",
             "company": "IPLAX",
@@ -136,15 +138,21 @@
         };
         $('#ttaJ1,#ttaJ2').val( JSON.stringify( staticJsonSample, undefined, 2) );
 
-
-        $('.tab').children('a').get(1).click(); //START ON TAB 02
-
+        
         $('div#message-container').dragable({
             'classNameForDivInMoviment':'divActiveMove',
             'afterMove': function() {
                 cleanMessages();
                 putMessages('Moved at ' +new Date()); 
             }
+        });
+
+        var jsonObject = {};
+        $(document).on('change', '#F_frmToJSON :input', function() {
+            $.addValueOnJSON(this, jsonObject);
+            putMessages('Change of ' + $(this).attr('id')); 
+
+            $('#iJsonCurrentData').val( JSON.stringify( jsonObject, undefined, 2 ) );
         });
     });
 })();

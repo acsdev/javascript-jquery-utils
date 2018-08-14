@@ -28,7 +28,7 @@ input[type=button], button {
 
 #message-container {
     width: 600px; 
-    min-height: 200px;
+    min-height: 300px;
     border: 1px dotted gray;
     cursor: move;
     position: absolute;
@@ -42,4 +42,10 @@ input[type=button], button {
     transition: 0.3s;
     font-size: 17px;
     background-color: #f1f1f1;
+}
+
+.jsonFORM label {
+    width: 100px;
+    display: inline-block;
+    text-align: end;
 }

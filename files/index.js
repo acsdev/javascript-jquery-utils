@@ -15,7 +15,9 @@
         cleanMessages();
     });
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $(document).on('click', '#btnSleep2', function() {
         cleanMessages();
         putMessages('INI', new Date());
@@ -66,7 +68,42 @@
             putMessages('Data is not in correct format');
         }
     });
-    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $(document).on('change', '#inpt64', function() {
+        cleanMessages();
+        
+        var fileNameArray = JSUtils.getFileNameArray( $(this)[0] );
+        putMessages( '     FileName: '.concat(fileNameArray[0]) );
+        putMessages( 'FileExtension: '.concat(fileNameArray[1]) );
+
+        JSUtils.inputFileToBase64( $(this)[0], function( base64Result ) {
+            $('#iBase64').val( base64Result );
+        });       
+    });
+
+    $(document).on('click', '#aCopy', function() {
+        JSUtils.copyFromText('#iBase64');
+    });
+
+    $(document).on('click', '#aDown', function() {
+        cleanMessages();
+
+        var iBase64 = $('#iBase64').val();
+        var fileNameArray = JSUtils.getFileNameArray( $('#inpt64')[0] );
+
+        JSUtils.downloadFileWithBase64( iBase64, fileNameArray[0], fileNameArray[1],
+            function() {
+                putMessages('Error on download file');
+            },
+            function() {
+                putMessages('Download file with success');
+            });
+    });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     $(document).on('click', '#btnExecFillCmbx', function() {
         cleanMessages();
         try {
@@ -121,6 +158,7 @@
         })
     });
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +173,7 @@
     });
 
     $(document).ready(function() {
-        $('.tab').children('a').get(2).click(); //START ON TAB 02
+        $('.tab').children('a').get(1).click(); //START ON TAB 02
 
         var staticJsonSample = {
             "_id": "5b6ef116157df345e9d7c77b",
@@ -154,8 +192,7 @@
         $('div#message-container').dragable({
             'classNameForDivInMoviment':'divActiveMove',
             'afterMove': function() {
-                cleanMessages();
-                putMessages('Moved at ' +new Date()); 
+                console.log('Moved at ' +new Date()); 
             }
         });
 

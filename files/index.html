@@ -17,12 +17,12 @@
 		</div>
 		<div class="tab">
 			<a href="javascript:void(0)" class="tablinks active">Just JS</a>
+			<a href="javascript:void(0)" class="tablinks">File</a>
 			<a href="javascript:void(0)" class="tablinks">JQuery (Ajax / COMBO)</a>
 			<a href="javascript:void(0)" class="tablinks">JQuery (Form / JSON)</a>
 		</div>
 		<div id="tab-view">
 			<div class="tabcontent">
-				
 				<button id="btnSleep2">Sleep for two seconds</button>
 				<br /><br />
 
@@ -43,6 +43,41 @@
 					<button id="btnRandom">Random</button>
 				</div>
 			</div>
+
+			<div class="tabcontent">
+				<h4>This sample will use show the functions:</h4>
+				<table>
+					<tr>
+						<td>copyFromText</td>
+						<td><span style="color: red">Copy text to clipboard.</span></td>
+					</tr>
+					<tr>
+						<td>getFileNameArray</td>
+						<td><span style="color: red">Get an array of file name information.</span></td>
+					</tr>
+					<tr>
+						<td>inputFileToBase64</td>
+						<td><span style="color: red">Get value from input file and convert to base64 string.</span></td>
+					</tr>
+					<tr>
+						<td>downloadFileWithBase64</td>
+						<td><span style="color: red">
+							Get an base64 string, convert to byte and download it. 
+							Use function <strong style="color: black">base64ToArrayBuffer</strong> as auxiliary function.</span></td>
+					</tr>
+				</table>
+				<br /><br /><br />
+				<input type="file" id="inpt64"/>
+				<br />	
+				<textarea rows="20" cols="70" id="iBase64"></textarea>
+				<br />
+				<a href="javascript:void(0)" id="aCopy">Copy to clipboard</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:void(0)" id="aDown">Download base64 file</a>
+
+			</div>
+
+
 			<div class="tabcontent">
 				<h4>This sample will use show the functions:</h4>
 				<table>

@@ -61,6 +61,59 @@ var JSUtils = (function() {
     };
 
     /**
+     * Execute copy to clipboard of input text
+     * 
+     * @param {*} querySelector 
+     */
+    fn.copyFromText = function( querySelector ) {
+        var input = document.querySelector(querySelector);
+        input.select();
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        input.blur();
+    }
+
+    /**
+     * Return an array with tow itens
+     * [0] - FileName
+     * [1] - FileExtension
+     * @param {*} input HTML input file
+     */
+    fn.getFileNameArray = function( input ) {
+        var fullPath = input.value;
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var fileNameVet = [];
+            fileNameVet[0] = filename.substring(0, filename.lastIndexOf('.'));
+            fileNameVet[1] = filename.substring(filename.lastIndexOf('.') + 1);
+            return fileNameVet;
+        }
+        throw new Error('Fail on get file name');
+    };
+
+   /*
+    * Convert base64 into array
+    * @param {*} base64Data sample of base64Data ( "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBx ..." )
+    */ 
+   fn.inputFileToBase64 = function( input, callback ) {
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL( input.files[0] );
+        fileReader.onerror = function (error) { 
+            throw new Error('Unexpected error on read file data');
+        };
+        fileReader.onload = function () {
+            callback( fileReader.result );
+        }; 
+   }
+
+    /**
      * Convert base64 into array
      * @param {*} base64Data sample of base64Data ( "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBx ..." )
      */ 
@@ -90,19 +143,12 @@ var JSUtils = (function() {
      */
     fn.downloadFileWithBase64 = function( base64Value, fileName, extension, callbackError, callbackSuccess ) {
         try {
-            var binaryString = window.atob(base64Value);
-            var binaryLen = binaryString.length;
-            var bytes = new Uint8Array(binaryLen);
-            for (var i = 0; i < binaryLen; i++) {
-            var ascii = binaryString.charCodeAt(i);
-            bytes[i] = ascii;
-            }
-            
+            var bytes     = fn.base64ToArrayBuffer( base64Value );
             var blob = new Blob([bytes]);
             //
             var link      = document.createElement('a');
             link.href     = window.URL.createObjectURL(blob);
-            link.download = fileName.concat(new Date().getTime()).concat( extension );
+            link.download = fileName.concat('.').concat( extension );
             link.click(); 
         } catch(ex) {
             console.log( ex );

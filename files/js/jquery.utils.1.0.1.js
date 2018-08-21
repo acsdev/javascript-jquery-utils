@@ -135,7 +135,7 @@
      * @param {*} jsonOBJECT JSON object
      */
     $.addValueOnJSON = function(input, jsonOBJECT) {
-        var onFileType = function( objectToPutData, input, base64DottedNotation ) {
+        var onFileType = function( input, _jsonObject, _dotNotatationObject, _base64DottedNotation ) {
             if ( $(input).attr('type') === 'file' ) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL( $(input)[0].files[0] );
@@ -143,11 +143,27 @@
                     throw new Error('Unexpected error on read file data')
                 };
                 fileReader.onload = function () {
-                    $.addValueWithDottedNotation( objectToPutData, base64DottedNotation, fileReader.result );
+                    $.addValueWithDottedNotation( _jsonObject, _dotNotatationObject, $(input).val() );
+                    $.addValueWithDottedNotation( _jsonObject, _base64DottedNotation, fileReader.result );
                 };                
             }
         }
 
+        var addValue = function(_type, _jsonObject, _dotNotatationObject, _value) {
+
+            if ( _type === 'file' ) {
+                var bindBase64 = $(input).attr('data-entity-bind-base64');
+                if (bindBase64) {
+                    var dotNotatationObject64  = bindBase64.replace(/(.+)(\[)(.+)(\]$)/, '$3');
+                    onFileType( input, _jsonObject, _dotNotatationObject, dotNotatationObject64 );
+                }
+            }
+            if ( _type !== 'file' ) {
+                $.addValueWithDottedNotation( _jsonObject, _dotNotatationObject, _value );
+            }
+        };
+        
+        var type  = $(input).attr('type');
         var value = $(input).val();
         if ( $(input)[0].hasAttribute('data-decimalnumber')) {
             if (/\./g.test( value ) && /,/g.test( value )) { value = value.replace(/\./g, '').replace(/,/g, '.');  } //IF value has '.' and ','
@@ -155,11 +171,11 @@
         }
 
         var dottedNotationAttribute = $(input).attr('data-entity-bind');
-        var dottedNotationAttributeBase64 = $(input).attr('data-entity-bind-base64');
-        
         var isAttrInList = /(.+)(\[)(.+)(\]$)/.test( dottedNotationAttribute );
         
-        if ( isAttrInList ) {
+        if ( ! isAttrInList ) {
+            addValue( type, jsonOBJECT, dottedNotationAttribute, value);
+        } else {
             var dataIndex    =  $(input).attr('data-entity-bind-index');
 
             var attrListName = dottedNotationAttribute.replace(/(.+)(\[)(.+)(\]$)/, '$1');
@@ -173,18 +189,8 @@
                 jsonOBJECT[attrListName][dataIndex] = {};
             }
 
-            var insideObject = jsonOBJECT[attrListName][dataIndex];
-            
-            $.addValueWithDottedNotation( insideObject, attrName, value );
-            if ( $(input).attr('type') === 'file' ) {
-                var attrName64  = dottedNotationAttributeBase64.replace(/(.+)(\[)(.+)(\]$)/, '$3');
-                onFileType( insideObject, $(input), attrName64 );
-            }
-        } else {
-            $.addValueWithDottedNotation( jsonOBJECT, dottedNotationAttribute, value );
-            if ( $(input).attr('type') === 'file' ) {
-                onFileType( jsonOBJECT, $(input), dottedNotationAttributeBase64 );
-            }
+            var insideObject = jsonOBJECT[attrListName][dataIndex];            
+            addValue( type, insideObject, attrName, value);
         }
     };
 

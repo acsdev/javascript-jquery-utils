@@ -191,7 +191,7 @@
     });
 
     $(document).ready(function() {
-        $('.tab').children('a').get(1).click(); //START ON TAB 02
+        $('.tab').children('a:last').click(); //START ON TAB 02
 
         var staticJsonSample = {
             "_id": "5b6ef116157df345e9d7c77b",
@@ -215,11 +215,26 @@
         });
 
         var jsonObject = {};
-        $(document).on('change', '#F_frmToJSON :input', function() {
+        $(document).on('change', '#F_frmToJSON1 :input', function() {
             $.addValueOnJSON(this, jsonObject);
             putMessages('Change of ' + $(this).attr('id')); 
 
             $('#iJsonCurrentData').val( JSON.stringify( jsonObject, undefined, 2 ) );
         });
+
+        $(document).on('click', '#bFillForm', function() {
+            cleanMessages();
+            var jsonValue = $('#iJsonCurrentData').val();
+            if (jsonValue) {
+                var dotNotation = $.convertJsonObjectToDotNotationObject( JSON.parse( jsonValue ) );
+                putMessages('Dot notation of json'); 
+                putMessages('Look console to see dotted notation object'); 
+                console.log( dotNotation );
+                putMessages('Using dot notation to fill form');
+
+                $.putDataOnScreenDottedOperation( $('#F_frmToJSON2'), dotNotation);
+                putMessages('Finish');
+            }
+        });    
     });
 })();

@@ -197,8 +197,8 @@
     /**
      * Set a value into json object.
      * 
-     * @param {*} jsonOBJECT json object
-     * @param {*} dottedNotationAttribute  path on attr that will receive the value
+     * @param {JSON} jsonOBJECT json object
+     * @param {string} dottedNotationAttribute  path on attr that will receive the value
      * @param {*} value value will want set
      */
     $.addValueWithDottedNotation = function(jsonOBJECT, dottedNotationAttribute, value) {
@@ -217,9 +217,13 @@
     };
 
     /**
-     * Convert an object json into a dotted notation string.
-     * Samples:
+     * Convert an object json into a dot notation string.
      * 
+     * @param {*} jsonOBJECT 
+     * @param {*} target 
+     * @param {*} prefix 
+     * @param {*} index 
+     * @returns {*} JSON as string
      */
     $.convertJsonObjectToDotNotationObject = function(jsonOBJECT, target, prefix, index) {
         target = target || {},
@@ -240,21 +244,29 @@
         return target;
     };
 
+    /**
+     * Fill input data with dot notation string
+     * 
+     * @param {*} parentArea ID or Element parent of fields you want fill
+     * @param {string} dottedNotation dot notation JSON
+     */
     $.putDataOnScreenDottedOperation = function( parentArea, dottedNotation ) {
 
         var fill = function( inputField, key, indexValue ) {
             if ($(inputField).attr('type') === 'file') {   
+                
+                var finalKeyValue  = key;
+                var finalKeyBase64 = $( inputField ).attr('data-entity-bind-base64');
+                if ( indexValue ) {
+                    finalKeyValue  = '_KEY{_INDEX}'.replace(/_KEY/g, key).replace(/_INDEX/g, indexValue);
+                    finalKeyBase64 ='_KEY{_INDEX}'.replace(/_KEY/g, dataBindKeyBase64).replace(/_INDEX/g, indexValue);
+                }
                 //
-                var linkDownload      = $( inputField ).parent('div').find('[data-entity-bind-input-file-name]');
-                var dataBindKeyBase64 = $( inputField ).attr('data-entity-bind-img64');
+                var val       = dottedNotation[ finalKeyValue ];
+                var base64    = dottedNotation[ finalKeyBase64 ];
                 //
-                var base64Key ='_KEY{_INDEX}'.replace(/_KEY/g, dataBindKeyBase64).replace(/_INDEX/g, indexValue);
-                var base64    = dottedNotation[ base64Key ];
-                var buffer    = OSUtils.base64ToArrayBuffer(base64);
-                var blob      = new Blob([buffer]);
-                linkDownload.text( dottedNotation[key] );
-                linkDownload.attr('href',  window.URL.createObjectURL(blob));
-                linkDownload.attr('download', dottedNotation[key]);
+                $(inputField).attr('data-entity-bind-value', val);
+                $(inputField).attr('data-entity-bind-base64-value', base64);
             } else if ( $(inputField).attr('type') === 'radio' ) {
                 $( inputField ).each(function() { 
                     if ($(this).val() ===  dottedNotation[key] ) {

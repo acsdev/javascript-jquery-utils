@@ -51,6 +51,8 @@
             putMessages('Data is not in correct format');
         }
     });
+
+
     $(document).on('click', '#btnRandom', function() {
         cleanMessages();
         try {
@@ -103,7 +105,23 @@
     });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $(document).on('click', '#btnFmt', function() {
+        cleanMessages();
+        try {
+            var msg = $('#txtMsgFmt01').val();
+
+            var p0 = $('#txtMsgFmt02').val();
+            var p1 = $('#txtMsgFmt03').val();
+
+            var message = $.formatMessage( msg, [p0, p1] );
+            putMessages(message);
+        } catch (ex) { 
+            console.log( ex );
+            putMessages('Something wrong happen');
+        }
+    });
+
     $(document).on('click', '#btnExecFillCmbx', function() {
         cleanMessages();
         try {

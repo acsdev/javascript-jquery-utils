@@ -18,8 +18,8 @@
 		<div class="tab">
 			<a href="javascript:void(0)" class="tablinks active">Just JS</a>
 			<a href="javascript:void(0)" class="tablinks">File</a>
-			<a href="javascript:void(0)" class="tablinks">JQuery (Ajax / COMBO)</a>
-			<a href="javascript:void(0)" class="tablinks">JQuery (Form / JSON)</a>
+			<a href="javascript:void(0)" class="tablinks">JQuery 01</a>
+			<a href="javascript:void(0)" class="tablinks">JQuery 02</a>
 		</div>
 		<div id="tab-view">
 			<div class="tabcontent">
@@ -35,7 +35,7 @@
 				<label for="txtLevens">Order level numbers</label>
 				<input type="text" style="width: 720px;" value="0.1.0, 1.0.1, 2.0.1, 0.3.0.1, 1.0, 2.0.3, 5.1.1, 4.3, 3.1, 1, 3, 2" id="txtLevens">
 				<button id="btnOrder">Order</button>
-				
+
 				<div>
 					<input type="text">
 					<input type="number">
@@ -82,6 +82,10 @@
 				<h4>This sample will use show the functions:</h4>
 				<table>
 					<tr>
+						<td>formatMessage</td>
+						<td><span style="color: red">Format parametrized string</span></td>
+					</tr>
+					<tr>
 						<td>selectOneWaiting</td>
 						<td><span style="color: red">Shows '. . .' while wait for data</span></td>
 					</tr>
@@ -94,6 +98,14 @@
 						<td><span style="color: red">Execute functions in order</span></td>
 					</tr>
 				</table>
+
+				<br /><br />
+				<input type="text" style="width: 500px;" value="Massage '{0}' with '{0}' equals '{1}'" id="txtMsgFmt01">
+				<input type="text" style="width: 100px;" value="Zero" id="txtMsgFmt02">
+				<input type="text" style="width: 100px;" value="One" id="txtMsgFmt03">
+				<button id="btnFmt">Format</button>
+
+				<br /><br />
 				<select id="cmbxRandomText"><option value="">Select</option></select>
 				<select id="cmbxDate" data-loading-text="Loading"><option value="">Select</option></select>
 				<button id="btnExecFillCmbx">Do it</button>

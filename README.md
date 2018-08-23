@@ -22,3 +22,16 @@
 4. Now, you shoud be able to access the page with samples at http://localhost:8000
 ######
 5. Ajax mock data will be provided from http://localhost:3000
+
+
+### Sumary of functions
+|--- |--- |--- |
+|sleep|Stop execution for some time|
+|randomString / randomPercentNumber / randomDate|Genarate randmon data|
+|jsonEquals|Test if json is equals|
+|orderNumberLevels|Order level numbers|
+|copyFromText|Copy text to clipboard.|
+|getFileNameArray|Get an array of file name information.|
+|inputFileToBase64|Get value from input file and convert to base64 string.|
+|downloadFileWithBase64|Get an base64 string, convert to byte and download it. 
+Use function base64ToArrayBuffer as auxiliary function.|

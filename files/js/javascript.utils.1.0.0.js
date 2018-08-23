@@ -50,7 +50,7 @@ var JSUtils = (function() {
      * Order an array with this kind of data: [0.1.0, 1.0.1, 2.0.1, 0.3.0.1, 1.0, 2.0.3, ...]
      * @param {*} array 
      */
-    fn.orderNumberLevels = function( array ) {    
+    fn. = function( array ) {    
         var splitAndThenSumHundredThousandAndBack = function( item ) {
             return item.split('.').map( function( part ){ return + ( parseInt( part ) + 100000) }).join('.');
         }

@@ -180,6 +180,33 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var jsonObject = {};
+    $(document).on('change', '#F_frmToJSON1 :input', function() {
+        $.addValueOnJSON(this, jsonObject);
+        putMessages('Change of ' + $(this).attr('id')); 
+
+        $('#iJsonCurrentData').val( JSON.stringify( jsonObject, undefined, 2 ) );
+    });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $(document).on('click', '#bFillForm', function() {
+        cleanMessages();
+        var jsonValue = $('#iJsonCurrentData2').val();
+        if (jsonValue) {
+            var dotNotation = $.convertJsonObjectToDotNotationObject( JSON.parse( jsonValue ) );
+            putMessages('Dot notation of json'); 
+            putMessages('Look console to see dotted notation object'); 
+            console.log( dotNotation );
+            putMessages('Using dot notation to fill form');
+
+            $.putDataOnScreenFromDotNotationObject( $('#F_frmToJSON2'), dotNotation);
+            putMessages('Finish');
+        }
+    });    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $(document).on('click','.tablinks', function() {
         $('.tabcontent').hide();
         $('.tablinks').removeClass('active');
@@ -191,7 +218,7 @@
     });
 
     $(document).ready(function() {
-        $('.tab').children('a:last').click(); //START ON TAB 02
+        $('.tab').children('a:first').click(); //START ON TAB 02
 
         var staticJsonSample = {
             "_id": "5b6ef116157df345e9d7c77b",
@@ -214,27 +241,8 @@
             }
         });
 
-        var jsonObject = {};
-        $(document).on('change', '#F_frmToJSON1 :input', function() {
-            $.addValueOnJSON(this, jsonObject);
-            putMessages('Change of ' + $(this).attr('id')); 
-
-            $('#iJsonCurrentData').val( JSON.stringify( jsonObject, undefined, 2 ) );
-        });
-
-        $(document).on('click', '#bFillForm', function() {
-            cleanMessages();
-            var jsonValue = $('#iJsonCurrentData').val();
-            if (jsonValue) {
-                var dotNotation = $.convertJsonObjectToDotNotationObject( JSON.parse( jsonValue ) );
-                putMessages('Dot notation of json'); 
-                putMessages('Look console to see dotted notation object'); 
-                console.log( dotNotation );
-                putMessages('Using dot notation to fill form');
-
-                $.putDataOnScreenDottedOperation( $('#F_frmToJSON2'), dotNotation);
-                putMessages('Finish');
-            }
-        });    
+        var json = '{"sex":"F","name":"Anna","phoneList":[{"phoneNumber":"456456465546"},{"phoneNumber":"123123123123"}],"document":{"number":"123123","date":"2018-08-15"},"fileName":"C:\\fakepath\\bear.jpeg","base64Data":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"}';
+        var stringfied = JSON.stringify( JSON.parse(json), undefined, 2);
+        $('#iJsonCurrentData2').val( stringfied );
     });
 })();

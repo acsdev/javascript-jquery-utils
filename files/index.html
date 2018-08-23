@@ -16,13 +16,35 @@
 			
 		</div>
 		<div class="tab">
-			<a href="javascript:void(0)" class="tablinks active">Just JS</a>
-			<a href="javascript:void(0)" class="tablinks">File</a>
+			<a href="javascript:void(0)" class="tablinks active">JS 01</a>
+			<a href="javascript:void(0)" class="tablinks">JS 02</a>
 			<a href="javascript:void(0)" class="tablinks">JQuery 01</a>
 			<a href="javascript:void(0)" class="tablinks">JQuery 02</a>
+			<a href="javascript:void(0)" class="tablinks">JQuery 03</a>
 		</div>
 		<div id="tab-view">
 			<div class="tabcontent">
+				<h4>This sample will use show the functions:</h4>
+				<table>
+					<tr>
+						<td>sleep</td>
+						<td><span style="color: red">Stop execution for some time</span></td>
+					</tr>
+					<tr>
+						<td>randomString / randomPercentNumber / randomDate</td>
+						<td><span style="color: red">Genarate randmon data</span></td>
+					</tr>
+					<tr>
+						<td>jsonEquals</td>
+						<td><span style="color: red">Test if json is equals</span></td>
+					</tr>
+					<tr>
+						<td>orderNumberLevels</td>
+						<td><span style="color: red">Order level numbers</span></td>
+					</tr>
+				</table>				
+				<br /><br />
+				
 				<button id="btnSleep2">Sleep for two seconds</button>
 				<br /><br />
 
@@ -140,14 +162,6 @@
 						<td>addValueWithDottedNotation</td>
 						<td><span style="color: red">User by addValueOnJSON function to put data into JSON</span></td>
 					</tr>
-					<tr>
-						<td>convertJsonObjectToDotNotationObject</td>
-						<td><span style="color: red">Get json object and convert into a map (dottednotation:value)</span></td>
-					</tr>
-					<tr>
-						<td>putDataOnScreenDottedOperation</td>
-						<td><span style="color: red">Get dottednotation value and put data into inputs</span></td>
-					</tr>
 				</table>
 				<br />
 				<div class="wrapper2spec7and3">
@@ -168,11 +182,39 @@
 							<br />
 							<label for="iPhone02" id="lPhone02">Phone 02:</label>
 							<input type="number" id="iPhone02" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="1"/>
+							<br />
+							<label for="iDocN" id="lDocN">Doc Number:</label>
+							<input type="number" id="iDocN" data-entity-bind="document.number"/>
+							<br />
+							<label for="iDocD" id="lDocD">Doc Date:</label>
+							<input type="date" id="iDocD" data-entity-bind="document.date" min="0"/>
 						</form>
-						<br /><br /><br />
-						
-						<button id="bFillForm">Json To Form</button>
-						<br />
+					</div>
+					<div>
+						<textarea rows="30" cols="70" disabled id="iJsonCurrentData"></textarea>
+					</div>
+					<div><!-- third grid --></div>
+				</div>
+			</div>	
+			<div class="tabcontent">
+				<div>
+					<h4>This sample will use show the functions:</h4>
+					<table>
+						<tr>
+							<td>convertJsonObjectToDotNotationObject</td>
+							<td><span style="color: red">Get json object and convert into a map (dottednotation:value)</span></td>
+						</tr>
+						<tr>
+							<td>putDataOnScreenFromDotNotationObject</td>
+							<td><span style="color: red">Get dottednotation value and put data into inputs</span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="wrapper2spec7and3">
+					<div>
+						<textarea rows="30" cols="70" disabled id="iJsonCurrentData2"></textarea>
+					</div>
+					<div>
 						<form action="#" method="POST" class="jsonFORM" id="F_frmToJSON2">
 							<label for="iSex1" id="lSex">Sex:</label>
 							<input disabled type="radio" name="male" value="M" id="iSex1" data-entity-bind="sex" /><label style="width: 40px;" for="iSex" id="lSex">Male</label>
@@ -183,19 +225,26 @@
 							<br />
 							<label for="iFile" id="lFile">Any File:</label>
 							<input disabled type="file" id="iFile" data-entity-bind="fileName" data-entity-bind-base64="base64Data"/>
-							<br /><span><strong>File information is hidden on data-* attributes</strong></span>
+							<br />
+							<label>&nbsp;</label>
+							<span><strong style="font-size: x-small">File information will be hidden in data-* attributes (check your console)</strong></span>
 							<br />
 							<label for="iPhone01" id="lPhone01">Phone 01:</label>
 							<input disabled type="number" id="iPhone01" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="0" />
 							<br />
 							<label disabled for="iPhone02" id="lPhone02">Phone 02:</label>
 							<input disabled type="number" id="iPhone02" data-entity-bind="phoneList[phoneNumber]" data-entity-bind-index="1"/>
+							<br />
+							<label for="iDocN" id="lDocN">Doc Number:</label>
+							<input type="number" id="iDocN" data-entity-bind="document.number"/>
+							<br />
+							<label for="iDocD" id="lDocD">Doc Date:</label>
+							<input type="date" id="iDocD" data-entity-bind="document.date" min="0"/>
 						</form>
-					</div>
-					<div>
-						<textarea rows="30" cols="100" disabled id="iJsonCurrentData"></textarea>
+						<button id="bFillForm">Json To Form</button>						
 					</div>
 					<div><!-- third grid --></div>
+					</div>
 				</div>
 			</div>
 		</div>

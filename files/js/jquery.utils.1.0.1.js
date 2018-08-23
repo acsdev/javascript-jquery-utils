@@ -219,29 +219,34 @@
     /**
      * Convert an object json into a dot notation string.
      * 
-     * @param {*} jsonOBJECT 
-     * @param {*} target 
-     * @param {*} prefix 
-     * @param {*} index 
-     * @returns {*} JSON as string
+     * @param {*} objectJSON JSON objet that will be converted 
+     * 
+     * 
+     * @returns {array} Array where is position has a pair (dot notation = value)
      */
-    $.convertJsonObjectToDotNotationObject = function(jsonOBJECT, target, prefix, index) {
-        target = target || {},
-        prefix = prefix || '';
-      
-        Object.keys(jsonOBJECT).forEach(function(key) {
-            if ( typeof( jsonOBJECT[key] ) === 'object' ) {
-                if (isNaN(key)) {
-                    $.convertJsonObjectToDotNotationObject(jsonOBJECT[key], target, prefix + key + '.', index);
+    $.convertJsonObjectToDotNotationObject = function(objectJSON) {
+
+        var doIt = function(jsonOBJECT, target, prefix, index) {
+            target = target || {},
+            prefix = prefix || '';
+          
+            Object.keys(jsonOBJECT).forEach(function(key) {
+                if ( typeof( jsonOBJECT[key] ) === 'object' ) {
+                    if (isNaN(key)) {
+                        doIt(jsonOBJECT[key], target, prefix + key + '.', index);
+                    } else {
+                        doIt(jsonOBJECT[key], target, prefix.substring(0, prefix.length-1) + '[', key);
+                    }
                 } else {
-                    $.convertJsonObjectToDotNotationObject(jsonOBJECT[key], target, prefix.substring(0, prefix.length-1) + '[', key);
+                    var finalPrefix = prefix + key + (index ? ']{' + index + '}' : '' );
+                    return target[finalPrefix] = jsonOBJECT[key];
                 }
-            } else {
-                var finalPrefix = prefix + key + (index ? ']{' + index + '}' : '' );
-                return target[finalPrefix] = jsonOBJECT[key];
-            }
-        });
-        return target;
+            });
+
+            return target;
+        }
+
+        return doIt( objectJSON );
     };
 
     /**
@@ -250,7 +255,7 @@
      * @param {*} parentArea ID or Element parent of fields you want fill
      * @param {string} dottedNotation dot notation JSON
      */
-    $.putDataOnScreenDottedOperation = function( parentArea, dottedNotation ) {
+    $.putDataOnScreenFromDotNotationObject = function( parentArea, dottedNotation ) {
 
         var fill = function( inputField, key, indexValue ) {
             if ($(inputField).attr('type') === 'file') {   

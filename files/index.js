@@ -241,7 +241,7 @@
             }
         });
 
-        var json = '{"sex":"F","name":"Anna","phoneList":[{"phoneNumber":"456456465546"},{"phoneNumber":"123123123123"}],"document":{"number":"123123","date":"2018-08-15"},"fileName":"C:\\fakepath\\bear.jpeg","base64Data":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"}';
+        var json = '{"sex":"F","name":"Anna","phoneList":[{"phoneNumber":"456456465546"},{"phoneNumber":"123123123123"}],"document":{"number":"123123","date":"2018-08-15"},"fileName":"bear.jpeg","base64Data":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"}';
         var stringfied = JSON.stringify( JSON.parse(json), undefined, 2);
         $('#iJsonCurrentData2').val( stringfied );
     });

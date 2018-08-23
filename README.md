@@ -28,7 +28,7 @@
 |Function|Description|
 |---:|---|
 |sleep|Stop execution for some time|
-|randomString / randomPercentNumber / randomDate|Genarate randmon data|
+|randomString / randomPercentNumber / randomDate|Generate random data|
 |jsonEquals|Test if json is equals|
 |orderNumberLevels|Order level numbers|
 |copyFromText|Copy text to clipboard.|
